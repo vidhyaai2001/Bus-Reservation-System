@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center align-items-center p-2">
+  <%= form_tag search_buses_path, method: :get, class: "form-inline" do %>
+    <div class="form-group mb-2">
+      <%= text_field_tag :search_source, params[:search_source], placeholder: "Enter From", class: "form-control" %>
+    </div>
+    <div class="form-group mx-sm-2 mb-2">
+      <%= text_field_tag :search_destination, params[:search_destination], placeholder: "Enter To", class: "form-control" %>
+    </div>
+    <%= submit_tag "Search", class: "btn btn-primary mb-2" %>
+  <% end %>
+</div>
+
+<div id="buses" class="row">
+  <% @buses.each do |bus| %>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow mb-4"> <!-- Add shadow effect to the card -->
+        <div class="card-body">
+          <h5 class="card-title"><%= bus.name %></h5>
+          <p class="card-text"><strong>Bus No:</strong> <%= bus.registration_number %></p>
+          <a href="<%= bus_path(bus) %>" class="btn btn-primary">Show this bus</a>
+         
+          <a href="<%= new_bus_reservation_path(bus) %>" class="btn btn-primary">Seat Book</a>
+         
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

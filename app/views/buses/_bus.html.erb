@@ -1,0 +1,49 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div id="<%= dom_id bus %>" class="card">
+        <div class="card-body">
+          <h2 class="card-title">Bus Details</h2>
+
+          <p class="card-text">
+            <strong>Name:</strong>
+            <%= bus.name %>
+          </p>
+
+          <p class="card-text">
+            <strong>Registration number:</strong>
+            <%= bus.registration_number %>
+          </p>
+
+          <p class="card-text">
+            <strong>Route source:</strong>
+            <%= bus.route_source %>
+          </p>
+
+          <p class="card-text">
+            <strong>Route destination:</strong>
+            <%= bus.route_destination %>
+          </p>
+
+          <p class="card-text">
+            <strong>Total seats:</strong>
+            <%= bus.total_seats %>
+          </p>
+
+         <!-- <p class="card-text">
+            <strong>Bus owner:</strong>
+            <%= bus.bus_owner_id %>
+          </p> -->
+
+          <p class="card-text">
+            <strong>Departure time:</strong>
+            <%= "#{bus.departure_time.strftime('%H:%M %p')}"  %>
+
+          </p>
+
+          <p class="card-text">
+            <strong>Arrival time:</strong>
+            <%= "#{bus.arrival_time.strftime('%H:%M %p')}"  %>
+          </p>
+        </div>
+      </div>

@@ -1,0 +1,84 @@
+<%= form_with(url: new_bus_reservation_path(@bus), method: :get, class: 'mt-3') do |form| %>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= form.label :date, class: 'font-weight-bold' %>
+      <%= form.date_field :date, class: 'form-control', onchange: 'this.form.submit();' %>
+    </div>
+  </div>
+<% end %>
+
+<div class="seat-grid mt-4">
+  <% @bus.seats.each do |seat| %>
+    <div class="seat-checkbox">
+      <% seat_reserved = @reservations.any? { |r| r.seat_id == seat.id } %>
+      <input type="checkbox" id="seat_<%= seat.id %>" name="reservation[seat_id][]" value="<%= seat.id %>" class="custom-checkbox" <%= seat_reserved ? 'checked disabled' : 'disabled' %> />
+      <label for="seat_<%= seat.id %>" class="seat-label <%= seat_reserved ? 'reserved' : '' %>"><%= seat.seat_number %></label>
+    </div>
+  <% end %>
+</div>
+
+
+<style> 
+.custom-checkbox {
+  width: 30px; /* Adjust the width as needed */
+  height: 30px; /* Adjust the height as needed */
+}
+
+/* Optional: Increase label font size */
+.seat-label {
+  font-size: 16px; /* Adjust the font size as needed */
+}
+
+/* Optional: Style for reserved seats */
+.reserved {
+  color: red;
+}
+
+  /* Add any additional CSS styles as needed */
+  h1 {
+    color: #333;
+  }
+
+  .seat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+
+  .seat-checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  label {
+    margin-left: 5px;
+  }
+</style>
+
+
+
+
+
+
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<%= form_with(url: bus_reservations_path(@bus), method: :get, id: 'reservation-form', class: 'mt-3') do |form| %>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= form.label :date, class: 'font-weight-bold' %>
+      <%= form.date_field :date, id: 'selected-date', class: 'form-control' %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Attach a change event listener to the date field
+    $('#selected-date').change(function() {
+      // Submit the form when the date is selected
+      $('#reservation-form').submit();
+    });
+  });
+</script> -->

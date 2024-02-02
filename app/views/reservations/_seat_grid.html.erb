@@ -1,0 +1,39 @@
+<%= form_with(model: [@bus, @reservations], local: true) do |form| %>
+  <!-- Other form fields and labels can be added as needed -->
+
+  <div class="seat-grid">
+    <% @bus.seats.each do |seat| %>
+      <div class="seat-checkbox">
+        <% checkbox_options = { multiple: true, checked: false, disabled: seat_reserved?(seat.id) } %>
+        <%= form.check_box :seat_id, checkbox_options, seat.id, nil %>
+        <%= form.label :seat_id, seat.seat_number %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit "Book Seat", class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<style>
+  /* Add any additional CSS styles as needed */
+  h1 {
+    color: #333;
+  }
+
+  .seat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+  }
+
+  .seat-checkbox {
+    display: flex;
+    align-items: center;
+  }
+
+  label {
+    margin-left: 5px;
+  }
+</style>

@@ -1,0 +1,23 @@
+<div class="container mt-5">
+ 
+  <% @reservations.each do |reservation| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Bus Information</h5>
+        <p class="card-text">
+          <strong>Bus Name:</strong> <%= reservation.seat.bus.name %><br>
+          <strong>Route Source:</strong> <%= reservation.seat.bus.route_source %><br>
+          <strong>Route Destination:</strong> <%= reservation.seat.bus.route_destination %><br>
+          <strong>Registration Number:</strong> <%= reservation.seat.bus.registration_number %><br>
+          <strong>Registration Date:</strong> <%= reservation.reservation_date %>
+        </p>
+        <div >
+          <%= link_to "Cancel Reservation", bus_reservation_path(reservation.seat.bus, reservation),
+                      method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                      class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  
+  <% end %>
+</div>
