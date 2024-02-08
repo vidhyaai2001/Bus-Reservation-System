@@ -8,15 +8,15 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_sign_up_path_for(resource)
-    if resource.has_user_type?('bus_owner')
-       root_path 
-    elsif resource.has_user_type?('customer')
-     root_path
-    else
-      super
-    end
-  end
+  # def after_sign_up_path_for(resource)
+  #   if resource.has_user_type?('bus_owner')
+  #      root_path 
+  #   elsif resource.has_user_type?('customer')
+  #    root_path
+  #   else
+  #     super
+  #   end
+  # end
 end
 #   rails generate model Bus name:string registration_number:string route_source:string 
 #   route_destination:string total_seats:integer bus_owner:references

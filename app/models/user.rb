@@ -8,12 +8,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
       
          validates :user_name, presence: true, length: { maximum: 255 }
-         validates :phone, presence: true, numericality: { only_integer: true }, length: { is: 10 }
-         validates :user_type, presence: true, inclusion: { in: [:customer, :bus_owner] }
-    
+         validates :phone, presence: true,numericality: { only_integer: true }, length: { is: 10 }
+        
+         validates :user_type, presence: true, inclusion: { in: ['customer', 'bus_owner'] }
+         validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ }
+
          enum user_type: { customer: 'customer', bus_owner: 'bus_owner' }
 
-         def has_user_type?(desired_type)
-          self.user_type == desired_type
-        end
+        #  def has_user_type?(desired_type)
+        #   self.user_type == desired_type
+        # end
 end

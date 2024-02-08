@@ -1,10 +1,6 @@
 class CustomersController < ApplicationController
 
-  def index
-
-
-  end
-  def my_resevations
+  def my_reservations
     @reservations=current_user.reservations
   end
 end

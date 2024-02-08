@@ -1,4 +1,41 @@
 <div class="container mt-5">
+  
+  <% @reservations.each do |reservation| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Bus Information</h5>
+        <p class="card-text">
+          <strong>Bus Name:</strong> <%= reservation.bus.name %><br>
+          <strong>Route Source:</strong> <%= reservation.bus.route_source %><br>
+          <strong>Route Destination:</strong> <%= reservation.bus.route_destination %><br>
+          <strong>Registration Number:</strong> <%= reservation.bus.registration_number %><br>
+          <strong>Registration Date:</strong> <%= reservation.reservation_date %><br>
+          <strong>Seat Number:</strong> <%= reservation.seat.seat_number %>
+        </p>
+        <div >
+          <%= link_to "Cancel Reservation", bus_reservation_path(reservation.bus, reservation),
+                      method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                      class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-5">
  
   <% @reservations.each do |reservation| %>
     <div class="card mb-3">
@@ -20,4 +57,4 @@
     </div>
   
   <% end %>
-</div>
+</div> -->
