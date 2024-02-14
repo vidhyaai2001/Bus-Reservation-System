@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center p-2 cream-bg">
+  <%= form_with url: search_owner_buses_path, method: :get, class: "form-inline" do |form| %>
+    <%= form.hidden_field :buses, value: @buses %>
+    <div class="form-group mb-2">
+      <%= form.text_field :search_source, value: params[:search_source], placeholder: "Enter From", class: "form-control" %>
+    </div>
+    <div class="form-group mx-sm-2 mb-2">
+      <%= form.text_field :search_destination, value: params[:search_destination], placeholder: "Enter To", class: "form-control" %>
+    </div>
+    <%= form.submit "Search", class: "btn btn-primary mb-2" %>
+  <% end %>
+</div>
+
+  <%= link_to "Add Bus", new_owner_bus_path, class: "btn btn-primary", id: "addBusButton" %>
+
+<div id="buses" class="row cream-bg">
+  <% @buses.each do |bus| %>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <h5 class="card-title"><strong>Bus Name:</strong><%= bus.name %></h5>
+          <p class="card-text"><strong>Bus No:</strong> <%= bus.registration_number %></p>
+          <a href="<%= owner_bus_path(bus) %>" class="btn btn-primary">Show this bus</a>
+          <a href="<%= new_bus_reservation_path(bus) %>" class="btn btn-success">Book Seat</a>
+    
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

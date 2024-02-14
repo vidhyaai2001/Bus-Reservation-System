@@ -1,7 +1,7 @@
-<div class="container mt-5">
+<div class="container mt-5 position-absolute">
   <div class="row justify-content-center">
     <div class="col-md-10">
-    <%= form_with(model: bus) do |form| %>
+    <%= form_with(model: bus, url: bus.persisted? ? owner_bus_path(bus) : owner_buses_path, local: true) do |form| %>
         <% if bus.errors.any? %>
           <div class="alert alert-danger">
             <h2><%= pluralize(bus.errors.count, "error") %> prohibited this bus from being saved:</h2>
@@ -43,6 +43,7 @@
           <%= form.label :departure_time, style: "display: block" %>
           <%= form.time_field :departure_time, class:"form-control", placeholder:"Departure Time" %>
         </div>
+
 
         <div class ="field form-group">
           <%= form.label :arrival_time, style: "display: block" %>

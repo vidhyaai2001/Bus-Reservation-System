@@ -13,7 +13,7 @@
           <strong>Seat Number:</strong> <%= reservation.seat.seat_number %>
         </p>
         <div >
-          <%= link_to "Cancel Reservation", bus_reservation_path(reservation.bus.id, reservation),
+          <%= link_to "Cancel Reservation", bus_reservation_path(reservation.bus, reservation),
                       method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
                       class: "btn btn-danger" %>
         </div>
@@ -21,4 +21,5 @@
     </div>
   <% end %>
 </div>
+
 

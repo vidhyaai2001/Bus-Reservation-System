@@ -18,9 +18,3 @@ class RegistrationsController < Devise::RegistrationsController
   #   end
   # end
 end
-#   rails generate model Bus name:string registration_number:string route_source:string 
-#   route_destination:string total_seats:integer bus_owner:references
-
-#   rails generate scaffold Bus name:string registration_number:string route_source:string
-#    route_destination:string
-#    total_seats:integer bus_owner:references departure_time:datetime arrival_time:datetime

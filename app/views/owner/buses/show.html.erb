@@ -1,0 +1,12 @@
+
+<%= render @bus %>
+<div class="mt-3">
+  <% if current_user == @bus.bus_owner %>
+   
+    <%= link_to "Edit this bus", edit_owner_bus_path(@bus), class: 'btn btn-primary mr-2' %>  
+    <%= link_to "Remove this bus", owner_bus_path(@bus), method: :delete, class: 'btn btn-danger', data: { turbo_confirm: 'Are you sure?', turbo_method: :delete, turbo_frame: 'head' } %>
+    <%= link_to "Bus Total Reservations", owner_bus_reservations_path(@bus), class: 'btn btn-primary mr-2' %>  
+  <% end %>
+  <%= link_to "Back to Buses", owner_buses_path, class: 'btn btn-secondary mr-2' %>
+</div>
+

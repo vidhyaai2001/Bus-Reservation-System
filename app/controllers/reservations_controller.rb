@@ -1,26 +1,16 @@
 class ReservationsController < ApplicationController
-  before_action :set_bus
-  before_action :require_bus_owner_and_owner_match, only: [:index]
+  before_action :set_bus, only: [:new,:create,:destroy]
+  #before_action :require_bus_owner_and_owner_match, only: [:index]
   before_action :authenticate_user!
-
-
   def new
     date = params[:date]
     @reservation = Reservation.new
     @seats = @bus.seats
     @reserved_seat_ids = @bus.reservations.for_date(date).pluck(:seat_id).to_set
   end
-
   def index
-    date = params[:date]
-    @seats = @bus.seats
-    @reserved_seat_ids = @bus.reservations.for_date(date).pluck(:seat_id).to_set
-  end
-
-  def show
      @reservations = current_user.reservations
   end
-
   def create  
     seat_ids = params[:reservation][:seat_id]
     date = params[:reservation][:reservation_date]
@@ -32,7 +22,7 @@ class ReservationsController < ApplicationController
         if reservations.all?(&:valid?) && !conflict_exists?(reservations)
           reservations.each(&:save)
           flash[:notice] = "Seats Reserved Successfully!"
-          redirect_to bus_reservation_path(@bus, reservations)
+          redirect_to reservations_path()
         else
           flash[:alert] = "Once a seat is booked, you cannot rebook it for the same date."
           redirect_to new_bus_reservation_path(@bus, date: date)
@@ -43,23 +33,15 @@ class ReservationsController < ApplicationController
       redirect_to new_bus_reservation_path(@bus, date: date)
     end
   end
-
   def destroy
     @reservation = @bus.reservations.find(params[:id])
     if @reservation.destroy
       flash[:notice]= 'Reservation was successfully canceled.'
     else
       flash[:alert] = "Error occurred while canceled seats."
-      redirect_to bus_reservation_path(@bus,@reservation)
-      return
     end
-    bus_reservation_path(@bus,@reservation)
+    redirect_back(fallback_location:bus_reservation_path(@bus,@reservation))
   end
-
-  # def my_reservations
-  #   @reservations=current_user.reservations
-  # end
-  
   private
   def require_bus_owner_and_owner_match
     unless current_user&.bus_owner? && current_user == @bus.bus_owner
