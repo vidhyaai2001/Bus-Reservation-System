@@ -21,10 +21,6 @@ class Owner::ReservationsController < ApplicationController
    # @reserved_seat_ids = @bus.reservations.pluck(:seat_id).to_set
    @reservations = @bus.reservations
   end
-  respond_to do |format|
-    format.html
-    format.turbo_stream
-  end
   end
   
   private

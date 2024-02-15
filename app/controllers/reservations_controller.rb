@@ -14,13 +14,14 @@ class ReservationsController < ApplicationController
   def create  
     seat_ids = params[:reservation][:seat_id]
     date = params[:reservation][:reservation_date]
-  
+      
     if date.present? && seat_ids.present?
       reservations = seat_ids.map { |seat_id| Reservation.new(reservation_params.merge(seat_id: seat_id)) }
   
       Reservation.transaction do
         if reservations.all?(&:valid?) && !conflict_exists?(reservations)
           reservations.each(&:save)
+
           flash[:notice] = "Seats Reserved Successfully!"
           redirect_to reservations_path()
         else

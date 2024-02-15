@@ -14,11 +14,6 @@ class Owner::BusesController < ApplicationController
   # Display a form for adding a new bus
   def new
     @bus = current_user.buses.build
-    respond_to do |format|
-      format.turbo_stream
-      format.html
-    end
-  
   end
 
   # GET /owner/buses/1/edit
